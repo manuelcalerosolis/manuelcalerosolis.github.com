@@ -3,8 +3,10 @@ layout: post
 title: Eminenetemente practico
 ---
 
-Next you can update your site name, avatar and other options using the _config.yml file in the root of your repository (shown below).
+Es la principal intencion de mi blog, contar como me va en mi experiencia de aprendizaje en php y laravel, narrar y describir los problemas que me voy encontrando en el desarrollo de mi nuevo proyecto.
 
-![_config.yml]({{ site.baseurl }}/images/config.png)
+Animado y convenicido por mi admirado Antonio Leiva @lime_cl, inicio este blog de caracter tecnico y con el calro objetivo de mostrar como se ponen en marcha la teoria aplicada a situaciones reales de la programación.
 
-The easiest way to make your first post is to edit this one. Go into /_posts/ and update the Hello World markdown file. For more instructions head over to the [Jekyll Now repository](https://github.com/barryclark/jekyll-now) on GitHub.
+Leo muchos blogs, pero en todos me quedo con la sensación de que son realmente poco practicos, q no iniciden sobre soluciones concretas a problmeas muy concretos, de estas soluciones quiero ir a la teoria y no al reves, a ver si lo consigo.
+
+Saludos.
