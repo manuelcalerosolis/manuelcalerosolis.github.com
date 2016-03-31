@@ -90,21 +90,26 @@ class Address extends Model
 
 La relación entre las tablas como podréis fácilmente observar se realizan a través de dos métodos
 
-Desde el modelo entidad describimos la relación con el modelo Address mediante la llamada a hasMany, pasando como parámetro dicho modelo
+Desde el modelo entidad describimos la relación con el modelo Address mediante la llamada a hasMany, pasando como parámetro dicho modelo.
+
 ```php
     public function addresses()
     {
         return $this->hasMany('App\Models\Address');
     }
 ```
+
 Desde el modelo direcciones describimos la relación con el modelo enitdades llamando a  método belongsTo, pasando como parámetro Entity.
+
 ```php
     public function entities()
     {
         return $this->belongsTo('App\Models\Entity');
     }
 ```
-Ya tenemos la relación establecida entre ambos modelos y para obtener la lista de direcciones que posee una entidad tan solo necesitamos llamar a la variable addresses, y cuidado con esto porque no se llama a método addresses(), sino a una variable que se instancia una ver creada esta relación, lo explica muy bien como siempre Jeffrey Way en este video [laracast]( https://laracasts.com/series/laravel-5-fundamentals/episodes/14), veamos por ejemplo como recorrerlo
+
+Ya tenemos la relación establecida entre ambos modelos y para obtener la lista de direcciones que posee una entidad tan solo necesitamos llamar a la variable addresses, y cuidado con esto porque no se llama a método addresses(), sino a una variable que se instancia una ver creada esta relación, lo explica muy bien como siempre Jeffrey Way en este video [laracast]( https://laracasts.com/series/laravel-5-fundamentals/episodes/14), veamos por ejemplo como recorrerlo.
+
 ```php
 @foreach($entity->addresses as $address )
     <p>
@@ -113,5 +118,4 @@ Ya tenemos la relación establecida entre ambos modelos y para obtener la lista 
 @endforeach
 ```
 
-
-Saludos.
+Continuara...
