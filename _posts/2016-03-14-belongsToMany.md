@@ -117,5 +117,7 @@ Ya tenemos la relación establecida entre ambos modelos y para obtener la lista 
     </p>
 @endforeach
 ```
+Ok, vale, todo esto está muy bien, y hasta aquí no aporto nada nuevo, hay muchos manuales que puedes consultar en internet sobre lo que os cuento.
+Pero mi intención es realizar un blog eminentemente práctico y para eso,  queda como realizar un mantenimiento completo de las Entidades, y por tanto de las Direcciones, vamos a ello.
 
 Continuara...
