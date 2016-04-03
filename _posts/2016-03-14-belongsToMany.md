@@ -251,35 +251,9 @@ class EntityController extends Controller
 Nada raro un controlador de lo mas simple que necesita de una vista para solicitar al usuario los datos que contendra la tabla.
 Yo uso tres vistas una para mostrar la releacion de Entidades [index.blade.php] otra para crearlas [create.blade.php] y otra para editarlas [edit.blade.php].
 
-\entity\create.blade.php
-```php
-<!DOCTYPE html>
-<html>
+Mostrare aqui tan solo la de edición por ser la mas compleja
 
-<body>
-
-    <div class="container">
-
-        @include('partials.errors')
-
-        {!! Form::open( ['route' => 'entity.store', 'method' => 'post'] ) !!}
-
-        @include('entity.fields')
-
-        <p>
-            {!! Form::submit(trans('forms.new')) !!}
-        </p>
-
-        {!! Form::close() !!}
-
-    </div>
-
-</body>
-
-</html>
-```
-
-\entity\create.blade.php
+\entity\edit.blade.php
 ```php
 <!DOCTYPE html>
 <html>
@@ -295,6 +269,10 @@ Yo uso tres vistas una para mostrar la releacion de Entidades [index.blade.php] 
     @include('entity.fields')
 
     <p>
+        {!! link_to_route('entity.address.create', trans('forms.new_address'), [$entity]) !!}
+    </p>
+
+    <p>
         @foreach($entity->addresses as $address )
             <p>
                 {!! Form::label('addresses', $address->name ) !!}
@@ -302,10 +280,6 @@ Yo uso tres vistas una para mostrar la releacion de Entidades [index.blade.php] 
                 {!! link_to_route('entity.address.destroy', trans('forms.delete'), [$address->id, $entity]) !!}
             </p>
         @endforeach
-    </p>
-
-    <p>
-        {!! link_to_route('entity.address.create', trans('forms.new_address'), [$entity]) !!}
     </p>
 
     <p>
@@ -321,5 +295,19 @@ Yo uso tres vistas una para mostrar la releacion de Entidades [index.blade.php] 
 </html>
 ```
 
+Desglosare las partes que son objeto de este artículo, lo primero es mostrar el bucle @foreach donde se muestran todas las direcciones perteneceientes a una Entidad.
+
+```php
+@foreach($entity->addresses as $address)
+    <p>
+        {!! Form::label('addresses', $address->name ) !!}
+        {!! link_to_route('entity.address.edit', trans('forms.update'), [$address->id, $entity]) !!}
+        {!! link_to_route('entity.address.destroy', trans('forms.delete'), [$address->id, $entity]) !!}
+    </p>
+@endforeach
+```
+
+Fijaros como se utiliza la variable $entity->addresses y no el metodo $entity->addresses() para sacar la relación de direcciones, se que estoy siendo muy pesado con este tema quizas porque a mi me trajo mas de un quebradero de cabeza.
+Mostramos el nombre de la dirección $addresse->name con el comando, e incluimos dos enlaces para actualizar y borrar la direccion que estan es este parrafo. 
 
 Continuara...
