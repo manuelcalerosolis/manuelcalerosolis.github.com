@@ -120,4 +120,206 @@ Ya tenemos la relación establecida entre ambos modelos y para obtener la lista 
 Ok, vale, todo esto está muy bien, y hasta aquí no aporto nada nuevo, hay muchos manuales que puedes consultar en internet sobre lo que os cuento.
 Pero mi intención es realizar un blog eminentemente práctico y para eso,  queda como realizar un mantenimiento completo de las Entidades, y por tanto de las Direcciones, vamos a ello.
 
+Vamos con las Etidades, lo primero es crear el conjunto de rutas para realizar el CRUD de esta tabla.
+
+```php
+    Route::resource('entity', 'EntityController');
+```
+
+Esto nos crea un conjunto de rutas necesarias para el mantenimiento de la tabla, veamos esas rutas
+
+php artisan route:list
++--------+-----------+-------------------------------------------+------------------------+---------------------------------------------------------------+------------+
+| Domain | Method    | URI                                       | Name                   | Action                                                        | Middleware |
++--------+-----------+-------------------------------------------+------------------------+---------------------------------------------------------------+------------+
+|        | GET|HEAD  | entity                                    | entity.index           | App\Http\Controllers\EntityController@index                   | auth       |
+|        | POST      | entity                                    | entity.store           | App\Http\Controllers\EntityController@store                   | auth       |
+|        | GET|HEAD  | entity/create                             | entity.create          | App\Http\Controllers\EntityController@create                  | auth       |
+|        | DELETE    | entity/{entity}                           | entity.destroy         | App\Http\Controllers\EntityController@destroy                 | auth       |
+|        | PUT|PATCH | entity/{entity}                           | entity.update          | App\Http\Controllers\EntityController@update                  | auth       |
+|        | GET|HEAD  | entity/{entity}                           | entity.show            | App\Http\Controllers\EntityController@show                    | auth       |
+|        | GET|HEAD  | entity/{entity}/edit                      | entity.edit            | App\Http\Controllers\EntityController@edit                    | auth       |
++--------+-----------+-------------------------------------------+------------------------+---------------------------------------------------------------+------------+
+
+Nescesitamos escribir el controlador EntityController 
+ 
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Address;
+use App\Models\Entity;
+use App\Http\Requests;
+use App\Http\Requests\Entity\Create;
+use App\Http\Requests\Entity\Update;
+use Illuminate\Support\Facades\Redirect;
+
+class EntityController extends Controller
+{
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('entity.index');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('entity.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Create $request)
+    {
+        Entity::create($request->all());
+
+        return Redirect::to('entity');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $entity = Entity::findOrFail($id);
+
+        return view('entity.edit', ['entity' => $entity]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $entity = Entity::findOrFail($id);
+
+        return view('entity.edit', ['entity' => $entity]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Update $request, $id)
+    {
+        $entity = Entity::findOrFail($id);
+
+        $entity->update($request->all());
+
+        return Redirect::to('entity');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        Entity::destroy($id);
+
+        return Redirect::to('entity');
+    }
+}
+```
+
+Nada raro un controlador de lo mas simple que necesita de una vista para solicitar al usuario los datos que contendra la tabla.
+Yo uso tres vistas una para mostrar la releacion de Entidades [index.blade.php] otra para crearlas [create.blade.php] y otra para editarlas [edit.blade.php].
+
+\entity\create.blade.php
+```php
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <div class="container">
+
+        @include('partials.errors')
+
+        {!! Form::open( ['route' => 'entity.store', 'method' => 'post'] ) !!}
+
+        @include('entity.fields')
+
+        <p>
+            {!! Form::submit(trans('forms.new')) !!}
+        </p>
+
+        {!! Form::close() !!}
+
+    </div>
+
+</body>
+
+</html>
+```
+
+\entity\create.blade.php
+```php
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<div class="container">
+
+    @include('partials.errors')
+
+    {!! Form::open( ['route' => [ 'entity.update', $entity->id ], 'method' => 'put' ] ) !!}
+
+    @include('entity.fields')
+
+    <p>
+        @foreach($entity->addresses as $address )
+            <p>
+                {!! Form::label('addresses', $address->name ) !!}
+                {!! link_to_route('entity.address.edit', trans('forms.update'), [$address->id, $entity]) !!}
+                {!! link_to_route('entity.address.destroy', trans('forms.delete'), [$address->id, $entity]) !!}
+            </p>
+        @endforeach
+    </p>
+
+    <p>
+        {!! link_to_route('entity.address.create', trans('forms.new_address'), [$entity]) !!}
+    </p>
+
+    <p>
+        {!! Form::submit(trans('forms.update')) !!}
+    </p>
+
+    {!! Form::close() !!}
+
+</div>
+
+</body>
+
+</html>
+```
+
+
 Continuara...
