@@ -8,7 +8,7 @@ Una de las cosas que más me fascina de Laravel es Eloquent, y una de las cosas 
 HasMany se usa para crear relaciones de uno-a-varios, usando tan solo una referencia desde uno de los modelos, al modelo con el que se relaciona [One-to-many (data model)
 ](https://en.wikipedia.org/wiki/One-to-many_(data_model))
 
-En mi caso trato de relacionar una tabla de entidades (Entities) de una empresa (Clientes, Proveedores, Agentes, Personal), con una tabla de direcciones (Addressess), y una entidad puede tener múltiples direcciones.
+En mi caso trato de relacionar una tabla de entidades (Entities) de una empresa (Clientes, Proveedores, Agentes, Personal), con una tabla de direcciones (Addresses), y una entidad puede tener múltiples direcciones.
 
 Os muestro a continuación los modelos que he usado.
 
@@ -128,6 +128,7 @@ Vamos con las Etidades, lo primero es crear el conjunto de rutas para realizar e
 
 Esto nos crea un conjunto de rutas necesarias para el mantenimiento de la tabla, veamos esas rutas.
 
+```php
 php artisan route:list
 +--------+-----------+-------------------------------------------+------------------------+---------------------------------------------------------------+------------+
 | Domain | Method    | URI                                       | Name                   | Action                                                        | Middleware |
@@ -140,6 +141,7 @@ php artisan route:list
 |        | GET|HEAD  | entity/{entity}                           | entity.show            | App\Http\Controllers\EntityController@show                    | auth       |
 |        | GET|HEAD  | entity/{entity}/edit                      | entity.edit            | App\Http\Controllers\EntityController@edit                    | auth       |
 +--------+-----------+-------------------------------------------+------------------------+---------------------------------------------------------------+------------+
+```
 
 Nescesitamos escribir el controlador EntityController 
  
