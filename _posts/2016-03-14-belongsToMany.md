@@ -256,7 +256,8 @@ Yo uso tres vistas una para mostrar la relación de Entidades [index.blade.php] 
 Mostrare aquí tan solo la de edición por ser la más compleja
 
 \entity\edit.blade.php
-```php
+
+
 <!DOCTYPE html>
 <html>
 
@@ -295,7 +296,7 @@ Mostrare aquí tan solo la de edición por ser la más compleja
 </body>
 
 </html>
-```
+
 
 Desglosare las partes que son objeto de este artículo, lo primero es mostrar el bucle @foreach donde se muestran todas las direcciones perteneceientes a una Entidad.
 
