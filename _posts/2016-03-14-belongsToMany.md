@@ -251,7 +251,7 @@ class EntityController extends Controller
 ```
 
 Nada raro un controlador de lo mas simple que necesita de una vista para solicitar al usuario los datos que contendra la tabla.
-Yo uso tres vistas una para mostrar la releacion de Entidades [index.blade.php] otra para crearlas [create.blade.php] y otra para editarlas [edit.blade.php].
+Yo uso tres vistas una para mostrar la relación de Entidades [index.blade.php] otra para crearlas [create.blade.php] y otra para editarlas [edit.blade.php].
 
 Mostrare aquí tan solo la de edición por ser la más compleja
 
