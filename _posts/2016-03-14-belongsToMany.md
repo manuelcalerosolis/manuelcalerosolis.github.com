@@ -126,7 +126,7 @@ Vamos con las Etidades, lo primero es crear el conjunto de rutas para realizar e
     Route::resource('entity', 'EntityController');
 ```
 
-Esto nos crea un conjunto de rutas necesarias para el mantenimiento de la tabla, veamos esas rutas
+Esto nos crea un conjunto de rutas necesarias para el mantenimiento de la tabla, veamos esas rutas.
 
 php artisan route:list
 +--------+-----------+-------------------------------------------+------------------------+---------------------------------------------------------------+------------+
@@ -307,7 +307,95 @@ Desglosare las partes que son objeto de este artículo, lo primero es mostrar el
 @endforeach
 ```
 
-Fijaros como se utiliza la variable $entity->addresses y no el metodo $entity->addresses() para sacar la relación de direcciones, se que estoy siendo muy pesado con este tema quizas porque a mi me trajo mas de un quebradero de cabeza.
-Mostramos el nombre de la dirección $addresse->name con el comando, e incluimos dos enlaces para actualizar y borrar la direccion que estan es este parrafo. 
+Fijaros como se utiliza la variable $entity->addresses y no el metodo $entity->addresses() para sacar la relación de direcciones, se que estoy siendo muy pesado con este tema, quizas porque a mi me trajo mas de un quebradero de cabeza.
+Mostramos el nombre de la dirección $address->name con el comando, e incluimos dos enlaces para actualizar y borrar la direccion que estan es este parrafo. 
+
+¿Como creamos direcciones [Addresses] que se relacionen con nuestras entidades [Entities]?
+Esta era una de mis principlaes dudas, entendiendo que para crear una nueva dirección necesitaba tener una referencia a la entidad a la que perteneceria.
+
+La solución es crear una rutas donde llegen información de la entidad a la que va a pertenecer.
+ 
+Para eso escribo unas rutas que recogen tanto el id de la entidad como la de la dirección, asi puedo establecer facilmente la relación.
+
+Siguiendo el consejo de mi amigo Jaime (@jaimesares) me recomendo que creara direcciones de rutas subordinadas enteponiendo el texto 'entity' a 'address', asi claramente se puede observar la relación de pertenencia entre ambos modelos, observando tan solo la ruta.
+
+```php
+    Route::get('entity/address/{entity}',
+        ['uses' => 'AddressController@create', 'as' => 'entity.address.create']);
+    Route::post('entity/address/{entity}',
+        ['uses' => 'AddressController@store', 'as' => 'entity.address.store']);
+    Route::put('entity/address/{address}/{entity}',
+        ['uses' => 'AddressController@update', 'as' => 'entity.address.update']);
+    Route::get('entity/address/{address}/edit/{entity}',
+        ['uses' => 'AddressController@edit', 'as' => 'entity.address.edit']);
+    Route::get('entity/address/{address}/destroy/{entity}',
+        ['uses' => 'AddressController@destroy', 'as' => 'entity.address.destroy']);
+```
+
+Para crear una nueva dirección utilizo este link.
+
+```php
+    {!! link_to_route('entity.address.create', trans('forms.new_address'), [$entity]) !!}
+```
+
+Como veis llamo a la direccion 'entity.address.create' pasandole $entity, asi sabre la entidad a la que pertenece la direccion que vamos a crear, 
+
+```php
+    public function create(Entity $entity)
+    {
+        return view('address.create', ['entity' => $entity]);
+    }
+```
+
+Este llama a la vista 'address.create' con el parametro $entity
+
+```php
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <div class="container">
+
+        @include('partials.errors')
+
+        {!! Form::open( ['route' => ['entity.address.store', $entity], 'method' => 'post'] ) !!}
+
+        @include('address.fields')
+
+        <p>
+            {!! Form::submit(trans('forms.new')) !!}
+        </p>
+
+        {!! Form::close() !!}
+
+    </div>
+
+</body>
+
+</html>
+```
+
+El formulario llama a 'entity.address.store' con $entity, y en controlador.
+
+```php
+    public function store(Create $request, Entity $entity)
+    {
+        $entity->addresses()->create( $request->all() );
+
+        return redirect()->route('entity.edit', [$entity->id]);
+    }
+```
+
+Este metodo recibe dos parametros el $request de donde obtenemos todos los datos de la dirección, y un modelo de entidad, fijaros bien porque nuestr segundo parametro es un modelo de tipo Entity, aunque nosotros lo que realmente hemos ido pasanado entre nuetras vistras y controloadores es tan solo el id de la entidad. 
+
+¿Como se consigue esto?
+
+Mediante algo novedoso en Laravel como es el Model Binding, Laravel se encarga de convertir nuestro id de la entidad en un modelo entidad, una vez tenemos esa entidad, tan solo hacemos una llamada al metodo create() de la relación que addresses() mantiene con la entidad, pasandole como paramtro el $request, quedaria asi.
+
+```php
+    $entity->addresses()->create( $request->all() );
+```
+
 
 Continuara...
