@@ -184,7 +184,7 @@ class CreateAddressesTable extends Migration
 }
 ```
 
-La relación entre las tablas como podréis fácilmente observar se realizan a través de dos métodos
+La relación entre las tablas como podréis fácilmente observar se realizan a través de dos métodos.
 
 Desde el modelo entidad describimos la relación con el modelo Address mediante la llamada a hasMany, pasando como parámetro dicho modelo.
 
