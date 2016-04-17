@@ -3,7 +3,7 @@ layout: post
 title: OneToMany
 ---
 
-Una de las cosas que más me fascina de Laravel es Eloquent, y una de las cosas que más me gusto dentro de Eloquent, fue la posibilidad de crear relaciones de una forma muy simple, usando el método [One To Many](https://laravel.com/docs/5.2/eloquent-relationships#one-to-many).
+Una de las cosas que más me fascina de **Laravel** es **Eloquent**, y una de las cosas que más me gusto dentro de Eloquent, fue la posibilidad de crear relaciones de una forma muy simple, usando el método [One To Many](https://laravel.com/docs/5.2/eloquent-relationships#one-to-many).
 
 HasMany se usa para crear relaciones de uno-a-varios, usando tan solo una referencia desde uno de los modelos, al modelo con el que se relaciona [One-to-many (data model)
 ](https://en.wikipedia.org/wiki/One-to-many_(data_model))
@@ -313,7 +313,8 @@ Desglosare las partes que son objeto de este artículo, lo primero es mostrar el
 Fijaros como se utiliza la variable $entity->addresses y no el metodo $entity->addresses() para sacar la relación de direcciones, sé que estoy siendo muy pesado con este tema, quizás porque a mí me trajo más de un quebradero de cabeza.
 Mostramos el nombre de la dirección $address->name con el comando, e incluimos dos enlaces para actualizar y borrar la dirección que están es este párrafo. 
 
-¿Como creamos direcciones [Addresses] que se relacionen con nuestras entidades [Entities]?
+# ¿Como creamos direcciones [Addresses] que se relacionen con nuestras entidades [Entities]?
+
 Esta era una de mis principlaes dudas, entendiendo que para crear una nueva dirección necesitaba tener una referencia a la entidad a la que perteneceria.
 
 La solución es crear una rutas donde llegen información de la entidad a la que va a pertenecer.
@@ -392,7 +393,7 @@ El formulario llama a 'entity.address.store' con $entity, y en controlador.
 
 Este método recibe dos parámetros el $request de donde obtenemos todos los datos de la dirección, y un modelo de entidad, fijaros bien porque nuestro segundo parámetro es un modelo de tipo Entity, aunque nosotros lo que realmente hemos ido pasando entre nuestras vistas y controladores es tan solo el id de la entidad. 
 
-¿Cómo se consigue esto?
+# ¿Cómo se consigue esto?
 
 Mediante algo novedoso en Laravel como es el [Route Model Binding](https://laravel.com/docs/5.2/routing#route-model-binding), Laravel se encarga de convertir nuestro id de la entidad en un modelo entidad, una vez tenemos esa entidad, tan solo hacemos una llamada al método create() de la relación que addresses() mantiene con la entidad, pasándole como parámetro el $request, quedaría así.
 
