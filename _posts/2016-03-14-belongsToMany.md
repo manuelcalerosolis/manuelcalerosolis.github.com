@@ -342,7 +342,7 @@ Para crear una nueva dirección utilizo este link.
     {!! link_to_route('entity.address.create', trans('forms.new_address'), [$entity]) !!}
 ```
 
-Como veis llamo a la direccion 'entity.address.create' pasandole $entity, asi sabre la entidad a la que pertenece la direccion que vamos a crear, 
+Como veis llamo a la direccion 'entity.address.create' pasandole $entity, así sabré la entidad a la que pertenece la dirección que vamos a crear. 
 
 ```php
     public function create(Entity $entity)
@@ -380,7 +380,7 @@ Este llama a la vista 'address.create' con el parametro $entity
 </html>
 ```
 
-El formulario llama a 'entity.address.store' con $entity, y en controlador.
+El formulario llama a 'entity.address.store' con $entity, y en este es método del controlador.
 
 ```php
     public function store(Create $request, Entity $entity)
@@ -393,7 +393,7 @@ El formulario llama a 'entity.address.store' con $entity, y en controlador.
 
 Este método recibe dos parámetros el $request de donde obtenemos todos los datos de la dirección, y un modelo de entidad, fijaros bien porque nuestro segundo parámetro es un modelo de tipo Entity, aunque nosotros lo que realmente hemos ido pasando entre nuestras vistas y controladores es tan solo el id de la entidad. 
 
-# ¿Cómo se consigue esto?
+### ¿Cómo se consigue esto?
 
 Mediante algo novedoso en Laravel como es el [Route Model Binding](https://laravel.com/docs/5.2/routing#route-model-binding), Laravel se encarga de convertir nuestro id de la entidad en un modelo entidad, una vez tenemos esa entidad, tan solo hacemos una llamada al método create() de la relación que addresses() mantiene con la entidad, pasándole como parámetro el $request, quedaría así.
 
