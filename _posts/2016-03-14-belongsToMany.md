@@ -391,11 +391,13 @@ Este metodo recibe dos parametros el $request de donde obtenemos todos los datos
 
 ¿Como se consigue esto?
 
-Mediante algo novedoso en Laravel como es el Model Binding, Laravel se encarga de convertir nuestro id de la entidad en un modelo entidad, una vez tenemos esa entidad, tan solo hacemos una llamada al metodo create() de la relación que addresses() mantiene con la entidad, pasandole como paramtro el $request, quedaria asi.
+Mediante algo novedoso en Laravel como es el Route Model Binding(https://laravel.com/docs/5.2/routing#route-model-binding), Laravel se encarga de convertir nuestro id de la entidad en un modelo entidad, una vez tenemos esa entidad, tan solo hacemos una llamada al metodo create() de la relación que addresses() mantiene con la entidad, pasandole como paramtro el $request, quedaria asi.
 
 ```php
     $entity->addresses()->create( $request->all() );
 ```
 
+El resultado de esta operación seraia la creacion de una dirección que pertenece a nuestra entidad, en definitiva solo mantiene una referencia al id del modelo enitdades en el campo 'entity_id'.
+ 
 
 Continuara...
