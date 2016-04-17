@@ -313,7 +313,7 @@ Desglosare las partes que son objeto de este artículo, lo primero es mostrar el
 Fijaros como se utiliza la variable $entity->addresses y no el metodo $entity->addresses() para sacar la relación de direcciones, sé que estoy siendo muy pesado con este tema, quizás porque a mí me trajo más de un quebradero de cabeza.
 Mostramos el nombre de la dirección $address->name con el comando, e incluimos dos enlaces para actualizar y borrar la dirección que están es este párrafo. 
 
-# ¿Como creamos direcciones [Addresses] que se relacionen con nuestras entidades [Entities]?
+### ¿Como creamos direcciones [Addresses] que se relacionen con nuestras entidades [Entities]?
 
 Esta era una de mis principlaes dudas, entendiendo que para crear una nueva dirección necesitaba tener una referencia a la entidad a la que perteneceria.
 
