@@ -499,6 +499,5 @@ Mediante algo novedoso en Laravel como es el [Route Model Binding](https://larav
 
 El resultado de esta operación sería la creación de una dirección que pertenece a nuestra entidad, en definitiva solo mantiene una referencia al id del modelo entidades en el campo 'entity_id'.
  
-
-Continuara...
+Saludos.
 
