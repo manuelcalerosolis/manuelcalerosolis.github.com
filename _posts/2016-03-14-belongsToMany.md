@@ -204,7 +204,7 @@ Desde el modelo direcciones describimos la relación con el modelo enitdades lla
     }
 ```
 
-Ya tenemos la relación establecida entre ambos modelos y para obtener la lista de direcciones que posee una entidad tan solo necesitamos llamar a la variable addresses, y ¡cuidado con esto!, porque no se llama a método addresses(), sino a una variable que se instancia una vez creada esta relación, lo explica muy bien como siempre Jeffrey Way en este video [laracast]( https://laracasts.com/series/laravel-5-fundamentals/episodes/14), veamos por ejemplo como recorrerlo.
+Ya tenemos la relación establecida entre ambos modelos, y para obtener la lista de direcciones que posee una entidad, tan solo necesitamos llamar a la variable addresses, y ¡cuidado con esto!, porque no se llama a método addresses(), sino a una variable que se instancia una vez creada esta relación, lo explica muy bien como siempre Jeffrey Way en este video [laracast]( https://laracasts.com/series/laravel-5-fundamentals/episodes/14), veamos por ejemplo como recorrerlo.
 
 ```php
 @foreach($entity->addresses as $address )
@@ -498,6 +498,8 @@ Mediante algo novedoso en Laravel como es el [Route Model Binding](https://larav
 ```
 
 El resultado de esta operación sería la creación de una dirección que pertenece a nuestra entidad, en definitiva solo mantiene una referencia al id del modelo entidades en el campo 'entity_id'.
+ 
+El código completo de este artículo lo tenéis en [https://github.com/manuelcalerosolis/squarerp](https://github.com/manuelcalerosolis/squarerp), donde estamos encantados que colaboréis.
  
 Saludos.
 
