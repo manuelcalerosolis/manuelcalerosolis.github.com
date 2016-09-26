@@ -10,7 +10,7 @@ Actualmente me interesa todo lo relacionado con el backend en PHP y Laravel.
 
 Actualmente vivo en La Palma del Condado, Huelva. 
 
-Apasionado de la programación y de todo lo q tenga q ver con las nuevas tecnologias.
+Apasionado de la programación y de todo lo q tenga q ver con las nuevas tecnologías.
 
 ### Contact me
 
