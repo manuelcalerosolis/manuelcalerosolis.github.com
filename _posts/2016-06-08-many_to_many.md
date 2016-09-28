@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ManyToMany
-date: 2016-01-01
+date: 2016-01-01 00:00:00
 ---
 
 Siguiendo con las relaciones el **laravel** os mostrare una solución práctica de [Many-to-many](https://laravel.com/docs/5.2/eloquent-relationships#many-to-many). 
