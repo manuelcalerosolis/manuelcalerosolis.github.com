@@ -1,6 +1,7 @@
 ---
 layout: post
 title: OneToMany
+date: 2016-01-01
 ---
 
 Una de las cosas que más me fascina de **Laravel** es **Eloquent**, y una de las cosas que más me gusto dentro de Eloquent, fue la posibilidad de crear relaciones de una forma muy simple, usando el método [One To Many](https://laravel.com/docs/5.2/eloquent-relationships#one-to-many).
