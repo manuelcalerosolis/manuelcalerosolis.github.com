@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Eminenetemente practico
+title:  Eminentemente practico
 date: 2016-01-01 00:00:00
 ---
 
