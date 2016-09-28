@@ -1,16 +1,17 @@
 ---
 layout: post
 title: ManyToMany
+date: 2016-01-01
 ---
 
-Siguiendo con las relaciones el **laravel** os mostrare una soluciÛn pr·ctica de [Many-to-many](https://laravel.com/docs/5.2/eloquent-relationships#many-to-many). 
+Siguiendo con las relaciones el **laravel** os mostrare una soluci√≥n pr√°ctica de [Many-to-many](https://laravel.com/docs/5.2/eloquent-relationships#many-to-many). 
 
-Many-to-many se usa para crear relaciones de varios-a-varios, usando una tabla intermedia denominada generalmente tabla pÌvot, donde contienen las referencias a los identificadores de las tablas que se relacionan. Many-to-many (data model)
+Many-to-many se usa para crear relaciones de varios-a-varios, usando una tabla intermedia denominada generalmente tabla p√≠vot, donde contienen las referencias a los identificadores de las tablas que se relacionan. Many-to-many (data model)
 ]( https://en.wikipedia.org/wiki/Many-to-many_(data_model))
 
 En mi caso trato de relacionar una tabla de entidades (Entities) de una empresa (Clientes, Proveedores, Agentes, Personal), con una tabla de roles (Roles), en la que especifico el role que mantiene con nuestra empresa.
 
-Os muestro a continuaciÛn los modelos.
+Os muestro a continuaci√≥n los modelos.
 
 ```php
 <?php
@@ -129,8 +130,8 @@ class EntityRole extends Model
  }
 ```
 
-La relaciÛn entre entidades y roles la determinamos con la funciÛn Roles() que usa la llamada belongsToMany, con el modelo como ˙nico par·metro.
-TambiÈn introduzco el mÈtodo getRoleListArttribute() que posteriormente me servir· para obtener todos los roles de nuestra entidad.
+La relaci√≥n entre entidades y roles la determinamos con la funci√≥n Roles() que usa la llamada belongsToMany, con el modelo como √∫nico par√°metro.
+Tambi√©n introduzco el m√©todo getRoleListArttribute() que posteriormente me servir√° para obtener todos los roles de nuestra entidad.
 
 ```php
 /**
@@ -153,7 +154,7 @@ public function getRoleListAttribute()
 ```
 
 
-Desde el modelo roles  describimos la relaciÛn con el modelo entidades desde el mÈtodo entities que contiene una llamada a belongsToMany, pasando como par·metro Entity.
+Desde el modelo roles  describimos la relaci√≥n con el modelo entidades desde el m√©todo entities que contiene una llamada a belongsToMany, pasando como par√°metro Entity.
 
 ```php
 public function entities()
@@ -162,11 +163,11 @@ public function entities()
 }
 ```
 
-Ya tenemos la relaciÛn establecida entre ambos modelos, vamos a trabjar con ellos.
+Ya tenemos la relaci√≥n establecida entre ambos modelos, vamos a trabjar con ellos.
 
-Vamos a crear nuestro controlador para Entity llamado EntityController, y como cosas a destacar, tengo que nombrar el uso de inyecciÛn de dependencias y desde el mÈtodo __construct() le paso los par·metros de los modelos Entity $entity, Role $role, para utilizarlos ya en todo el controlador y no estar continuamente instanci·ndolos.
+Vamos a crear nuestro controlador para Entity llamado EntityController, y como cosas a destacar, tengo que nombrar el uso de inyecci√≥n de dependencias y desde el m√©todo __construct() le paso los par√°metros de los modelos Entity $entity, Role $role, para utilizarlos ya en todo el controlador y no estar continuamente instanci√°ndolos.
 
-Volveremos mas tarde para detenernos en la creaciÛn de una nueva entidad pero antes os muestro la vista, contienen detalle importentes.
+Volveremos mas tarde para detenernos en la creaci√≥n de una nueva entidad pero antes os muestro la vista, contienen detalle importentes.
 
 ```php
 <?php
@@ -286,7 +287,7 @@ class EntityController extends Controller
 }
 ```
 
-A continuaciÛn os muestro la vista para crear nuevas vistas
+A continuaci√≥n os muestro la vista para crear nuevas vistas
 
 ```php
 <!DOCTYPE html>
@@ -315,7 +316,7 @@ A continuaciÛn os muestro la vista para crear nuevas vistas
 </html>
 ```
 
-Yo mantengo en un fichero fields los campos porque son comunes a la creaciÛn y modificaciÛn de los registros.
+Yo mantengo en un fichero fields los campos porque son comunes a la creaci√≥n y modificaci√≥n de los registros.
 
 ```php
 <p>
@@ -338,4 +339,4 @@ Yo mantengo en un fichero fields los campos porque son comunes a la creaciÛn y m
     {!! Form::select('role_list[]', ( isset( $roles ) ? $roles : [''] ), ( isset($entity) ? $entity->getRoleListAttribute() : null ), ['multiple'] ) !!}
 </p>
 ```
-ParÈmonos en el control **select** que contiene un array role_list[] donde almacenaremos la selecciÛn que nuestro usuario ha hecho de los roles que desea que mantenga nuestra entidad, si observ·is incluimos una llamada a getRoleLisAttribute(), para que el control select contenga la lista de Roles que tiene nuestra aplicaciÛn.
+Par√©monos en el control **select** que contiene un array role_list[] donde almacenaremos la selecci√≥n que nuestro usuario ha hecho de los roles que desea que mantenga nuestra entidad, si observ√°is incluimos una llamada a getRoleLisAttribute(), para que el control select contenga la lista de Roles que tiene nuestra aplicaci√≥n.
