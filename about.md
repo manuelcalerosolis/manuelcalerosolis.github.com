@@ -2,6 +2,7 @@
 layout: page
 title: About
 permalink: /about/
+date: 2016-01-01
 ---
 
 Programador de aplicaciones informaticas desde 1995. 
