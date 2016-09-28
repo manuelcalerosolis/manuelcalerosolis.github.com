@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Eminenetemente practico
+date: 2016-01-01
 ---
 
 Es la principal intención de mi blog, contar como me va en mi experiencia de aprendizaje en php y laravel, narrar y describir los problemas que me voy encontrando en el desarrollo de mi nuevo proyecto.
